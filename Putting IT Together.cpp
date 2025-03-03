@@ -17,3 +17,20 @@ int main() {
 
     return 0;
 }
+
+int main() {
+    std::string source = "3 + 4 * 5";
+    Lexer lexer(source);
+    std::vector<Token> tokens = lexer.tokenize();
+
+    Parser parser(tokens);
+    ASTNode* root = parser.parse();
+
+    CodeGenerator codeGen;
+    codeGen.generate(root);
+
+    // Clean up AST
+    delete root;
+
+    return 0;
+}
