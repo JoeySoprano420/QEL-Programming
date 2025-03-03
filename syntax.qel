@@ -31,3 +31,43 @@ remember userInfo as important
 if system restarts:
     restore userInfo
 
+define Fibonacci(n: int) -> int {
+    if n == 0 or n == 1 {
+        return n
+    }
+    else {
+        return Fibonacci(n-1) + Fibonacci(n-2)
+    }
+}
+
+define Double(n: int) -> int {
+    return n * 2
+}
+
+define Square(n: int) -> int {
+    return n * n
+}
+
+define SafeDivide(numerator: int, denominator: int) -> float {
+    attempt {
+        return numerator / denominator
+    }
+    on error {
+        retry using safeDivision(numerator, denominator)
+    }
+}
+
+wrap TaskScheduler(values: list) {
+    // Distribute tasks across multiple cores
+    multiTask(values, Parallel)
+}
+
+result is TaskScheduler([1, 2, 3, 4, 5])
+
+// Truth Table Example
+define IsValidBoolean(value: bool) -> bool {
+    if value == T then
+        return true
+    else
+        return false
+}
