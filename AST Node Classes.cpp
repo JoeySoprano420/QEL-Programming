@@ -159,3 +159,15 @@ public:
     }
 };
 
+class CodeGenerator {
+public:
+    void generate(ASTNode* root) {
+        if (auto* node = dynamic_cast<NumberNode*>(root)) {
+            std::cout << "PUSH " << node->value << std::endl;
+        } else if (auto* node = dynamic_cast<BinaryOpNode*>(root)) {
+            generate(node->left);
+            generate(node->right);
+            std::cout << "OP " << node->op << std::endl;
+        }
+    }
+};
