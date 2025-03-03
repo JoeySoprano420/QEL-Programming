@@ -1,0 +1,33 @@
+define Fibonacci of number → wholeNumber {
+    if number is 0 or number is 1, return number
+    otherwise return Fibonacci of (number minus 1) plus Fibonacci of (number minus 2)
+}
+
+wrap Double of number:
+    return number times 2
+
+wrap Square of number:
+    return number times number
+
+define Process of value using method:
+    return method of value
+
+result is Process of (4 using Square)
+
+define Compute of value:
+    attempt:
+        return value divided by 2
+    if fails:
+        retry using safeDivision of value
+    if still fails:
+        estimate based on closest known value
+
+repeat until success:
+    try Task of userInput
+    if failed:
+        fix userInput
+
+remember userInfo as important
+if system restarts:
+    restore userInfo
+
