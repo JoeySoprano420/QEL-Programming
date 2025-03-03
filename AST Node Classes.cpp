@@ -75,3 +75,41 @@ public:
 };
 
 #endif
+
+// AST for while and for loops
+class WhileLoopNode : public ExprNode {
+public:
+    std::shared_ptr<ExprNode> condition;
+    std::shared_ptr<ExprNode> body;
+    WhileLoopNode(std::shared_ptr<ExprNode> cond, std::shared_ptr<ExprNode> b)
+        : condition(cond), body(b) {}
+    void print() override {
+        std::cout << "while ";
+        condition->print();
+        std::cout << " { ";
+        body->print();
+        std::cout << " }";
+    }
+};
+
+class ForLoopNode : public ExprNode {
+public:
+    std::shared_ptr<ExprNode> initialization;
+    std::shared_ptr<ExprNode> condition;
+    std::shared_ptr<ExprNode> increment;
+    std::shared_ptr<ExprNode> body;
+    ForLoopNode(std::shared_ptr<ExprNode> init, std::shared_ptr<ExprNode> cond, 
+                std::shared_ptr<ExprNode> inc, std::shared_ptr<ExprNode> b)
+        : initialization(init), condition(cond), increment(inc), body(b) {}
+    void print() override {
+        std::cout << "for (";
+        initialization->print();
+        std::cout << "; ";
+        condition->print();
+        std::cout << "; ";
+        increment->print();
+        std::cout << ") { ";
+        body->print();
+        std::cout << " }";
+    }
+};
