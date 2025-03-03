@@ -113,3 +113,21 @@ public:
         std::cout << " }";
     }
 };
+
+class FunctionNode : public ExprNode {
+public:
+    std::string name;
+    std::shared_ptr<ParameterNode> parameters;
+    std::shared_ptr<ExprNode> body;
+
+    FunctionNode(const std::string& n, std::shared_ptr<ParameterNode> p, std::shared_ptr<ExprNode> b)
+        : name(n), parameters(p), body(b) {}
+
+    void print() override {
+        std::cout << "function " << name << "(";
+        parameters->print();
+        std::cout << ") { ";
+        body->print();
+        std::cout << " }";
+    }
+};
