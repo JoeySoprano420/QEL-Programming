@@ -112,3 +112,13 @@ for_statement:
     }
 ;
 
+statement:
+    if_statement
+    | while_statement
+    | assignment_statement
+    | error {
+        std::cerr << "Syntax error encountered. Attempting recovery.\n";
+        yyerrok; // Recover from the error
+    }
+;
+
