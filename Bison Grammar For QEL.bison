@@ -76,3 +76,39 @@ int main() {
     yyparse();
     return 0;
 }
+
+// Additional tokens for control structures
+%token IF THEN ELSE WHILE FOR LPAREN RPAREN LBRACE RBRACE SEMICOLON
+
+%%
+
+statements:
+    statement
+    | statements statement
+;
+
+statement:
+    if_statement
+    | while_statement
+    | for_statement
+    | assignment_statement
+;
+
+if_statement:
+    IF expression THEN statement ELSE statement {
+        $$ = new IfExprNode($2, $4, $6);
+    }
+;
+
+while_statement:
+    WHILE expression statement {
+        $$ = new WhileLoopNode($2, $3);
+    }
+;
+
+for_statement:
+    FOR LPAREN assignment_statement expression SEMICOLON expression RPAREN statement {
+        $$ = new ForLoopNode($2, $3, $5, $7);
+    }
+;
+
