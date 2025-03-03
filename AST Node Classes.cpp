@@ -131,3 +131,31 @@ public:
         std::cout << " }";
     }
 };
+
+enum class Type {
+    INT,
+    BOOL,
+    VOID
+};
+
+class TypeNode : public ExprNode {
+public:
+    Type type;
+
+    TypeNode(Type t) : type(t) {}
+
+    void print() override {
+        switch (type) {
+            case Type::INT:
+                std::cout << "int";
+                break;
+            case Type::BOOL:
+                std::cout << "bool";
+                break;
+            case Type::VOID:
+                std::cout << "void";
+                break;
+        }
+    }
+};
+
