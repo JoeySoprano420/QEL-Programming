@@ -25,3 +25,31 @@
 [ \t\n\r]+      { /* skip whitespace */ }
 .              { return ERROR; }
 %%
+
+%{
+#include "y.tab.h"
+%}
+
+%%
+"define"    { return DEFINE; }
+"wrap"      { return WRAP; }
+"attempt"   { return ATTEMPT; }
+"if"        { return IF; }
+"else"      { return ELSE; }
+"return"    { return RETURN; }
+"times"     { return TIMES; }
+"minus"     { return MINUS; }
+"divided"   { return DIVIDED; }
+"by"        { return BY; }
+"attempt"   { return ATTEMPT; }
+"fails"     { return FAILS; }
+"retry"     { return RETRY; }
+"restore"   { return RESTORE; }
+"remember"  { return REMEMBER; }
+"repeat"    { return REPEAT; }
+"until"     { return UNTIL; }
+"success"   { return SUCCESS; }
+[0-9]+      { yylval = atoi(yytext); return NUMBER; }
+[+*/=()]    { return yytext[0]; }
+[a-zA-Z]+   { return IDENTIFIER; }
+%%
