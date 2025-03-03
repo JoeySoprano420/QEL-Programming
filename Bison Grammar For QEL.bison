@@ -122,3 +122,38 @@ statement:
     }
 ;
 
+%{
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
+%token DEFINE WRAP ATTEMPT IF ELSE RETURN TIMES MINUS DIVIDED BY
+%token NUMBER IDENTIFIER
+
+%%
+
+program:
+    statements
+;
+
+statements:
+    statements statement
+    | statement
+;
+
+statement:
+    DEFINE IDENTIFIER 'of' IDENTIFIER '→' IDENTIFIER '{' expr '}'
+    | WRAP IDENTIFIER 'of' IDENTIFIER '{' expr '}'
+    | RETURN expr
+    | ATTEMPT expr IF expr
+    | RETURN expr
+;
+
+expr:
+    expr '+' expr
+    | expr '-' expr
+    | NUMBER
+    | IDENTIFIER
+    | IDENTIFIER '(' expr ')'
+;
+%%
